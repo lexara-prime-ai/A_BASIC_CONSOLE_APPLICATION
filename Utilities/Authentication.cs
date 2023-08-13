@@ -111,8 +111,8 @@ namespace JituCourses.Utilities
             if (string.IsNullOrWhiteSpace(rdx_USER_NAME))
             {
                 Console.WriteLine("Invalid input!");
+                // RETURN TO LOGIN
                 rax_LOGIN_USER();
-
             }
             else
             {
@@ -134,7 +134,7 @@ namespace JituCourses.Utilities
                     else
                     {
                         // HANDLE USER LOGIN
-                        Console.WriteLine($"{Environment.NewLine}Logining in as admin...");
+                        Console.WriteLine($"{Environment.NewLine}Logining in as user...");
                         Courses.rax_DISPLAY_COURSES();
                     }
                 }
@@ -143,12 +143,6 @@ namespace JituCourses.Utilities
                     Console.WriteLine("Incorrect password!");
                 }
             }
-
-
-
         }
-
-
     }
-
 }

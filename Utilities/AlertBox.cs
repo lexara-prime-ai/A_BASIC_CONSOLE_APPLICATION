@@ -8,9 +8,7 @@ namespace JituCourses.Utilities
             get
             {
                 return $@"
-*****************************
- {message.ToUpper()}      
-*****************************
+ {message.ToUpper()} >     
         ";
             }
         }
