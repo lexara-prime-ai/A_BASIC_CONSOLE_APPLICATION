@@ -1,5 +1,3 @@
-using BCrypt.Net;
-
 namespace JituCourses.Utilities
 {
     public static class FileOperations
@@ -15,10 +13,10 @@ namespace JituCourses.Utilities
         /**********
         WRITE FILE
         ***********/
-        public static void rax_WRITE_FILE(string? USER_NAME, string? USER_PASSWORD)
+        public static void rax_WRITE_FILE(string USER_NAME, string USER_PASSWORD)
         {
             // HASH PASSWORD
-            string rdx_HASHED_PASSWORD = BCrypt.Net.BCrypt.HashPassword(USER_PASSWORD, BCrypt.Net.BCrypt.GenerateSalt());
+            string rdx_HASHED_PASSWORD = BCrypt.Net.BCrypt.HashPassword(USER_PASSWORD);
 
             if (!File.Exists(rdx_FILE_PATH))
             {
@@ -29,7 +27,7 @@ namespace JituCourses.Utilities
                 }
             }
 
-            File.AppendAllText(rdx_FILE_PATH, $"{USER_NAME},${rdx_HASHED_PASSWORD}\n");
+            File.AppendAllText(rdx_FILE_PATH, $"{USER_NAME},{rdx_HASHED_PASSWORD}\n");
 
             // REGISTRATION RESPONSE
             Console.WriteLine($"{USER_NAME} has been added!");
@@ -68,28 +66,27 @@ namespace JituCourses.Utilities
         {
             rax_READ_FILE();
 
-            string rdx_STORED_PASSWORD;
-            // CHECK IF USER EXISTS IN DICTIONARY
-            if (rdx_REGISTERED_USERS.TryGetValue(_USER_NAME, out rdx_STORED_PASSWORD))
+            if (rdx_REGISTERED_USERS.ContainsKey(_USER_NAME))
             {
-                // CHECK IF STORED PASSWORD IS EQUAL TO PASSWORD INPUT
-                if (BCrypt.Net.BCrypt.Verify(_USER_PASSWORD, rdx_STORED_PASSWORD))
+                string rdx_STORED_PASSWORD = rdx_REGISTERED_USERS[_USER_NAME];
+
+                var isPasswordValid = BCrypt.Net.BCrypt.Verify(_USER_PASSWORD, rdx_STORED_PASSWORD);
+
+                if (isPasswordValid)
                 {
-                    Console.WriteLine("Login successful!");
-                    Console.WriteLine($"Welcome, {_USER_NAME}!");
                     return true;
                 }
                 else
                 {
-                    Console.WriteLine("Incorrect password!");
                     return false;
                 }
             }
             else
             {
-                Console.WriteLine($"User '{_USER_NAME}' not found.");
+                Console.WriteLine("User Not Found!");
                 return false;
             }
         }
+
     }
 }

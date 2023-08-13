@@ -112,7 +112,18 @@ namespace JituCourses.Utilities
             Console.WriteLine("Enter password...");
             rdx_USER_PASSWORD = Console.ReadLine();
 
-            FileOperations.rax_VALIDATE_USER(rdx_USER_NAME, rdx_USER_PASSWORD);
+            bool rdx_IS_VALID_USER = FileOperations.rax_VALIDATE_USER(rdx_USER_NAME, rdx_USER_PASSWORD);
+
+            // VALIDATE USER
+            if (rdx_IS_VALID_USER)
+            {
+                // HANDLE SUCCESSFUL LOGIN
+                Console.WriteLine("Logining in...");
+            }
+            else
+            {
+                Console.WriteLine("Incorrect password!");
+            }
 
         }
 
