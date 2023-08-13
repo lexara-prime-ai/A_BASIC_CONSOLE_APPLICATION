@@ -112,10 +112,11 @@ namespace JituCourses.Utilities
             {
                 Console.WriteLine("Invalid input!");
                 rax_LOGIN_USER();
+
             }
             else
             {
-
+                // RECEIVE USER PASSWORD
                 Console.WriteLine("Enter password >");
                 rdx_USER_PASSWORD = Console.ReadLine();
 
@@ -124,9 +125,18 @@ namespace JituCourses.Utilities
                 // VALIDATE USER
                 if (rdx_IS_VALID_USER)
                 {
-                    // HANDLE SUCCESSFUL LOGIN
-                    Console.WriteLine($"{Environment.NewLine}Logining in...");
-                    Courses.rax_DISPLAY_COURSES();
+                    if (rdx_USER_NAME == "admin")
+                    {
+                        // HANDLE ADMIN LOGIN
+                        Console.WriteLine($"{Environment.NewLine}Logining in as admin...");
+                        Courses.rax_DISPLAY_ADMIN_OPTIONS();
+                    }
+                    else
+                    {
+                        // HANDLE USER LOGIN
+                        Console.WriteLine($"{Environment.NewLine}Logining in as admin...");
+                        Courses.rax_DISPLAY_COURSES();
+                    }
                 }
                 else
                 {

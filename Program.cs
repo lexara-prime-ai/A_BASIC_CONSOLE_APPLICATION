@@ -11,5 +11,8 @@ class Program
 
         // DISPLAY AUTHENTICATION OPTIONS
         Authentication.rax_DISPLAY_AUTHENTICATION_OPTIONS();
+        
+        // string SELECTED_COURSE = Console.ReadLine();
+        // Courses.rax_ADD_COURSE(SELECTED_COURSE);
     }
 }
