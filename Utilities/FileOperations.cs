@@ -87,6 +87,5 @@ namespace JituCourses.Utilities
                 return false;
             }
         }
-
     }
 }
