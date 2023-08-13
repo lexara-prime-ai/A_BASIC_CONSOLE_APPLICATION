@@ -42,7 +42,7 @@ namespace JituCourses.Utilities
             // HANDLE USER REGISTRATION : Select Option 1
             if (rdx_SELECTED_OPTION == 1)
             {
-                string rdx_Username_AlertBox = AlertBox.rax_DISPLAY_ALERT_BOX("Create a username...");
+                string rdx_Username_AlertBox = AlertBox.rax_DISPLAY_ALERT_BOX("Create a username >");
 
                 Console.WriteLine(rdx_Username_AlertBox);
                 rdx_USER_NAME = Console.ReadLine();
@@ -58,7 +58,7 @@ namespace JituCourses.Utilities
                 else
                 {
                     // PROCEED IF USER INPUT IS VALID
-                    string rdx_Password_AlertBox = AlertBox.rax_DISPLAY_ALERT_BOX("Create a password...");
+                    string rdx_Password_AlertBox = AlertBox.rax_DISPLAY_ALERT_BOX("Create a password >");
                     Console.WriteLine(rdx_Password_AlertBox);
 
                     rdx_USER_PASSWORD = Console.ReadLine();
@@ -105,25 +105,36 @@ namespace JituCourses.Utilities
         ***********/
         public static void rax_LOGIN_USER()
         {
-
-            Console.WriteLine("Enter username...");
+            Console.WriteLine("Enter username >");
             rdx_USER_NAME = Console.ReadLine();
-
-            Console.WriteLine("Enter password...");
-            rdx_USER_PASSWORD = Console.ReadLine();
-
-            bool rdx_IS_VALID_USER = FileOperations.rax_VALIDATE_USER(rdx_USER_NAME, rdx_USER_PASSWORD);
-
-            // VALIDATE USER
-            if (rdx_IS_VALID_USER)
+            // VERIFY INPUT
+            if (string.IsNullOrWhiteSpace(rdx_USER_NAME))
             {
-                // HANDLE SUCCESSFUL LOGIN
-                Console.WriteLine("Logining in...");
+                Console.WriteLine("Invalid input!");
+                rax_LOGIN_USER();
             }
             else
             {
-                Console.WriteLine("Incorrect password!");
+
+                Console.WriteLine("Enter password >");
+                rdx_USER_PASSWORD = Console.ReadLine();
+
+                bool rdx_IS_VALID_USER = FileOperations.rax_VALIDATE_USER(rdx_USER_NAME, rdx_USER_PASSWORD);
+
+                // VALIDATE USER
+                if (rdx_IS_VALID_USER)
+                {
+                    // HANDLE SUCCESSFUL LOGIN
+                    Console.WriteLine($"{Environment.NewLine}Logining in...");
+                    Courses.rax_DISPLAY_COURSES();
+                }
+                else
+                {
+                    Console.WriteLine("Incorrect password!");
+                }
             }
+
+
 
         }
 
